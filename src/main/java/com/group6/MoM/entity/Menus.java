@@ -2,9 +2,12 @@ package com.group6.MoM.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,4 +37,8 @@ public class Menus {
 	private int protein;
 	
 	private String photo;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "partner_id")
+	private Partner partner;
 }

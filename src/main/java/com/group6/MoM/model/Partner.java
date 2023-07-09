@@ -1,5 +1,7 @@
 package com.group6.MoM.model;
 
+import javax.persistence.OneToMany;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
