@@ -35,5 +35,7 @@ public class Donatur {
 	@Column(nullable = false)
 	private String name;
 	
+	private String phone;
+	
 	private int amount;
 }

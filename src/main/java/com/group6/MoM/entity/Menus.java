@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,26 +14,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Driver {
+public class Menus {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "driver_id")
-	private int deiverId;
+	@Column(name = "menu_id")
+	private int menuId;
 	
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@Column(nullable = false)
 	private String name;
 	
-	private String phone;
+	private int carb;
 	
-	private String address;
+	private int fat;
+	
+	private int protein;
+	
+	private String photo;
 }

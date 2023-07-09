@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,7 @@ import com.group6.MoM.repository.MemberRepository;
 import com.group6.MoM.repository.PartnerRepository;
 import com.group6.MoM.repository.UserRepository;
 import com.group6.MoM.repository.VolunteerRepository;
+import com.group6.MoM.service.AdminService;
 import com.group6.MoM.service.UsersService;
 
 @RestController
@@ -29,6 +32,9 @@ public class AdminController {
 
 	@Autowired
 	private UsersService us;
+	
+	@Autowired
+	private AdminService as;
 	
 	@Autowired
 	private UserRepository ur;
@@ -64,7 +70,7 @@ public class AdminController {
 				userData.add(new RegisterDto(user, roleData ));
 			}else if(user.getRole().getName().equals("donatur")) {
 				Donatur roleData = dr.findByUser(user);
-				userData.add(new RegisterDto(user, roleData ));
+				userData.add(new RegisterDto(user, roleData )); 
 			}else if(user.getRole().getName().equals("driver")) {
 				Driver roleData = dvr.findByUser(user);
 				userData.add(new RegisterDto(user, roleData ));
@@ -73,7 +79,14 @@ public class AdminController {
 				userData.add(new RegisterDto(user, roleData ));
 			}
 		}
-		
 		return userData;
 	}
+	
+	@PostMapping("/approve/{id}")
+	public String approveUser(@PathVariable("id") int id) {
+		as.setApproveal(id, true);
+		return "ok";
+	}
+	
+	
 }
