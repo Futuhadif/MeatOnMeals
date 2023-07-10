@@ -9,11 +9,16 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Donatur {
 
+	/*for user table*/
 	private String name;
 	
 	private String username;
 	
 	private String email;
+	
+	/*for donatur table*/
+	
+	private String phone;
 	
 	private String password;
 	

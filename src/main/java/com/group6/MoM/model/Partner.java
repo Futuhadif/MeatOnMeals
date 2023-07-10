@@ -20,6 +20,8 @@ public class Partner {
 	
 	private String name;
 	
+	private String phone;
+	
 	private String address;
 	
 	private String brand;

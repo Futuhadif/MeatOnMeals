@@ -22,7 +22,10 @@ import com.group6.MoM.model.Driver;
 import com.group6.MoM.model.Member;
 import com.group6.MoM.model.Partner;
 import com.group6.MoM.model.Volunteer;
+import com.group6.MoM.repository.DonaturRepository;
+import com.group6.MoM.repository.DriverRepository;
 import com.group6.MoM.repository.MemberRepository;
+import com.group6.MoM.repository.PartnerRepository;
 import com.group6.MoM.repository.UserRepository;
 import com.group6.MoM.repository.VolunteerRepository;
 import com.group6.MoM.security.JwtTokenProvider;
@@ -44,6 +47,15 @@ public class UserController {
 	
 	@Autowired
 	VolunteerRepository vr;
+	
+	@Autowired
+	DriverRepository dvr;
+	
+	@Autowired
+	DonaturRepository dr;
+	
+	@Autowired
+	PartnerRepository pr;
 	
 	@Autowired
     PasswordEncoder pwe;
@@ -141,6 +153,15 @@ public class UserController {
             dto = new UserDto(user, token, roleData);
         }else if(user.getRole().getName().equals("volunteer")) {
         	com.group6.MoM.entity.Volunteer roleData = vr.findByUser(user);
+            dto = new UserDto(user, token, roleData);
+        }else if(user.getRole().getName().equals("driver")) {
+        	com.group6.MoM.entity.Driver roleData = dvr.findByUser(user);
+            dto = new UserDto(user, token, roleData);
+        }else if(user.getRole().getName().equals("donatur")) {
+        	com.group6.MoM.entity.Donatur roleData = dr.findByUser(user);
+            dto = new UserDto(user, token, roleData);
+        }else if(user.getRole().getName().equals("partner")) {
+        	com.group6.MoM.entity.Partner roleData = pr.findByUser(user);
             dto = new UserDto(user, token, roleData);
         }
 		return ResponseEntity.ok(dto);

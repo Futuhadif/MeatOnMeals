@@ -47,10 +47,6 @@ public class UsersService {
 	@Autowired
 	private PasswordEncoder pwe;
 	
-	public User nyoba() {
-		return ur.findByUsername("samsul345");
-
-	}
 	
 	public boolean registerMember( Member member) {
 		try {
@@ -91,6 +87,7 @@ public class UsersService {
 	        com.group6.MoM.entity.Volunteer savedVolunteer = new com.group6.MoM.entity.Volunteer();
 	        savedVolunteer.setUser(savedUser);
 	        savedVolunteer.setName(volunteer.getName());
+	        savedVolunteer.setPhone(volunteer.getPhone());
 	        savedVolunteer.setAddress(volunteer.getAddress());
 	        vr.save(savedVolunteer);
 
@@ -114,6 +111,7 @@ public class UsersService {
 	        com.group6.MoM.entity.Donatur savedDonatur = new com.group6.MoM.entity.Donatur();
 	        savedDonatur.setUser(savedUser);
 	        savedDonatur.setName(donatur.getName());
+	        savedDonatur.setPhone(donatur.getPhone());
 	        savedDonatur.setAmount(donatur.getAmount());
 	        dr.save(savedDonatur);
 
@@ -139,6 +137,7 @@ public class UsersService {
 	        savedPartner.setName(partner.getName());
 	        savedPartner.setAddress(partner.getAddress());
 	        savedPartner.setBrand(partner.getBrand());
+	        savedPartner.setPhone(partner.getPhone());
 	        pr.save(savedPartner);
 
 	        return true; // Operasi berhasil
@@ -162,6 +161,7 @@ public class UsersService {
 	        savedDriver.setUser(savedUser);
 	        savedDriver.setName(driver.getName());
 	        savedDriver.setAddress(driver.getAddress());
+	        savedDriver.setPhone(driver.getPhone());
 	        dvr.save(savedDriver);
 
 	        return true; // Operasi berhasil

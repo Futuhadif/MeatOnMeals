@@ -19,4 +19,6 @@ public class Driver {
 	
 	private String address;
 	
+	private String phone;
+	
 }

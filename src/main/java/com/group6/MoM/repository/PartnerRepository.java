@@ -12,4 +12,5 @@ public interface PartnerRepository extends JpaRepository<Partner, Integer> {
 	
 	public Partner findByUser(User user);
 
+	public Partner findByPartnerId(int id);
 }
