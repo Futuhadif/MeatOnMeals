@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group6.MoM.entity.OrderMenu;
+import com.group6.MoM.entity.Partner;
 import com.group6.MoM.repository.DriverRepository;
 import com.group6.MoM.repository.MemberRepository;
 import com.group6.MoM.repository.MenusRepository;
 import com.group6.MoM.repository.OrderRepository;
+import com.group6.MoM.repository.PartnerRepository;
 
 @Service
 public class OrderMenuService{
@@ -20,6 +22,9 @@ public class OrderMenuService{
 	
 	@Autowired
 	private MemberRepository mr;
+	
+	@Autowired
+	private PartnerRepository pr;
 	
 	@Autowired
 	private DriverRepository dvr;
@@ -37,6 +42,14 @@ public class OrderMenuService{
 		OrderMenu orderMenu = orderRepo.getById(orderId);
 		
 		orderMenu.setStatus(status);
+		orderRepo.save(orderMenu);
+	}
+	
+	public void prosesOrder(String status, int orderId, int partnerId) {
+		OrderMenu orderMenu = orderRepo.getById(orderId);
+		Partner partner = pr.getById(partnerId);
+		orderMenu.setStatus(status);
+		orderMenu.setPartnerName(partner.getName());
 		orderRepo.save(orderMenu);
 	}
 	

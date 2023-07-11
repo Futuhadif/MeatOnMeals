@@ -41,4 +41,6 @@ public class OrderMenu {
 	@ManyToOne
 	@JoinColumn(name = "driver_id")
 	private Driver driver;
+	
+	private String partnerName;
 }

@@ -39,8 +39,10 @@ public class OrderController {
 	}
 	
 	@PostMapping("/proses_order/{order_id}")
-	public void prosesOrder(@PathVariable("order_id") int orderId) {
-		oms.changeStatusOrder("proses", orderId);
+	public void prosesOrder(@PathVariable("order_id") int orderId, @RequestBody Map<String, Integer> requestData) {
+		int partnerId = (int) requestData.get("partnerId");
+		
+		oms.prosesOrder("PESANAN DITERIMA", orderId, partnerId);
 	}
 	
 	@PostMapping("/ready_order/{order_id}")

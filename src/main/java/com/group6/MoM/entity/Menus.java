@@ -42,7 +42,7 @@ public class Menus {
 	private Picture picture;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "partner_id")
 	private Partner partner;
 }

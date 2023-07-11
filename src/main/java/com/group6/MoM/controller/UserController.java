@@ -1,5 +1,7 @@
 package com.group6.MoM.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +10,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.group6.MoM.dto.LoginRequest;
 import com.group6.MoM.dto.UserDto;
@@ -30,7 +36,6 @@ import com.group6.MoM.security.UserDetailsServiceImpl;
 import com.group6.MoM.service.UsersService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -123,6 +128,110 @@ public class UserController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Email sudah terdaftar");
 	    }
 	}
+	
+	@PostMapping("/update_member")
+	public ResponseEntity<String> updateMember(@RequestBody Map<String, Object> requestData){
+		int memberId = (int) requestData.get("memberId");
+		String name = (String) requestData.get("name");
+		String phone = (String) requestData.get("phone");
+		String address = (String) requestData.get("address");
+		
+		com.group6.MoM.entity.Member memberEdit = mr.getById(memberId);
+		
+		memberEdit.setName(name);
+		memberEdit.setAddress(address);
+		memberEdit.setPhone(phone);
+		
+		try {
+			mr.save(memberEdit);
+	        return ResponseEntity.ok("Berhasil edit");
+		} catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("gagal");
+		}
+	}
+	
+	@PostMapping("/update_partner")
+	public ResponseEntity<String> updatePartner(@RequestBody Map<String, Object> requestData){
+		int memberId = (int) requestData.get("memberId");
+		String name = (String) requestData.get("name");
+		String phone = (String) requestData.get("phone");
+		String address = (String) requestData.get("address");
+		
+		com.group6.MoM.entity.Partner partnerEdit = pr.getById(memberId);
+		
+		partnerEdit.setName(name);
+		partnerEdit.setAddress(address);
+		partnerEdit.setPhone(phone);
+		
+		try {
+			pr.save(partnerEdit);
+	        return ResponseEntity.ok("Berhasil edit");
+		} catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("gagal");
+		}
+	}
+	
+	@PostMapping("/update_driver")
+	public ResponseEntity<String> updateDriver(@RequestBody Map<String, Object> requestData){
+		int memberId = (int) requestData.get("memberId");
+		String name = (String) requestData.get("name");
+		String phone = (String) requestData.get("phone");
+		String address = (String) requestData.get("address");
+		
+		com.group6.MoM.entity.Driver driverEdit = dvr.getById(memberId);
+		
+		driverEdit.setName(name);
+		driverEdit.setAddress(address);
+		driverEdit.setPhone(phone);
+		
+		try {
+			dvr.save(driverEdit);
+	        return ResponseEntity.ok("Berhasil edit");
+		} catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("gagal");
+		}
+	}
+	
+	@PostMapping("/update_donatur")
+	public ResponseEntity<String> updateDonatur(@RequestBody Map<String, Object> requestData){
+		int memberId = (int) requestData.get("memberId");
+		String name = (String) requestData.get("name");
+		String phone = (String) requestData.get("phone");
+		String address = (String) requestData.get("address");
+		
+		com.group6.MoM.entity.Donatur donaturEdit = dr.getById(memberId);
+		
+		donaturEdit.setName(name);
+		donaturEdit.setPhone(phone);
+		
+		try {
+			dr.save(donaturEdit);
+	        return ResponseEntity.ok("Berhasil edit");
+		} catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("gagal");
+		}
+	}
+	
+	@PostMapping("/update_volunteer")
+	public ResponseEntity<String> update_member(@RequestBody Map<String, Object> requestData){
+		int memberId = (int) requestData.get("memberId");
+		String name = (String) requestData.get("name");
+		String phone = (String) requestData.get("phone");
+		String address = (String) requestData.get("address");
+		
+		com.group6.MoM.entity.Volunteer volunteerEdit = vr.getById(memberId);
+		
+		volunteerEdit.setName(name);
+		volunteerEdit.setAddress(address);
+		volunteerEdit.setPhone(phone);
+		
+		try {
+			vr.save(volunteerEdit);
+	        return ResponseEntity.ok("Berhasil edit");
+		} catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("gagal");
+		}
+	}
 
 	
 	@PostMapping("/login")
@@ -168,7 +277,6 @@ public class UserController {
         	com.group6.MoM.entity.Partner roleData = pr.findByUser(user);
             dto = new UserDto(user, token, roleData);
         }
-		dto.setApproved(user.isApproved());
 		return ResponseEntity.ok(dto);
 	}
 	
