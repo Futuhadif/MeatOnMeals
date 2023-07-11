@@ -22,6 +22,7 @@ import com.group6.MoM.model.Driver;
 import com.group6.MoM.model.Member;
 import com.group6.MoM.model.Partner;
 import com.group6.MoM.model.Volunteer;
+import com.group6.MoM.repository.AdminRepository;
 import com.group6.MoM.repository.DonaturRepository;
 import com.group6.MoM.repository.DriverRepository;
 import com.group6.MoM.repository.MemberRepository;
@@ -41,6 +42,9 @@ public class UserController {
 	
 	@Autowired
 	UserRepository ur;
+	
+	@Autowired
+	AdminRepository ar;
 	
 	@Autowired
 	MemberRepository mr;
@@ -153,6 +157,9 @@ public class UserController {
             dto = new UserDto(user, token, roleData);
         }else if(user.getRole().getName().equals("volunteer")) {
         	com.group6.MoM.entity.Volunteer roleData = vr.findByUser(user);
+            dto = new UserDto(user, token, roleData);
+        }else if(user.getRole().getName().equals("admin")) {
+        	com.group6.MoM.entity.Admin roleData = ar.findByUser(user);
             dto = new UserDto(user, token, roleData);
         }else if(user.getRole().getName().equals("driver")) {
         	com.group6.MoM.entity.Driver roleData = dvr.findByUser(user);
