@@ -8,11 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.group6.MoM.dto.LoginRequest;
 import com.group6.MoM.dto.UserDto;
@@ -34,6 +30,7 @@ import com.group6.MoM.security.UserDetailsServiceImpl;
 import com.group6.MoM.service.UsersService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -171,6 +168,7 @@ public class UserController {
         	com.group6.MoM.entity.Partner roleData = pr.findByUser(user);
             dto = new UserDto(user, token, roleData);
         }
+		dto.setApproved(user.isApproved());
 		return ResponseEntity.ok(dto);
 	}
 	

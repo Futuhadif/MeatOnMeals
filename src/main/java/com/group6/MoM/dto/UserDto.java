@@ -19,13 +19,15 @@ public class UserDto {
     private Object roleData;
     private String accessToken;
 
+    private boolean approved;
+
     public UserDto(User user, String accessToken, Object roleData) {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.role = user.getRole().getName();
         this.approved = user.isApproved();
         this.accessToken = accessToken;
-
+        this.approved = user.isApproved();
         this.roleData = roleData;
     }
 }
