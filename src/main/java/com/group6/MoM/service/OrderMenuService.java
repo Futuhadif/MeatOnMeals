@@ -34,7 +34,7 @@ public class OrderMenuService{
 		
 		orderMenu.setMenu(menusRepo.getById(menuId));
 		orderMenu.setMember(mr.getById(memberId));
-		orderMenu.setStatus("order");
+		orderMenu.setStatus("ORDERING");
 		orderRepo.save(orderMenu);
 	}
 	
