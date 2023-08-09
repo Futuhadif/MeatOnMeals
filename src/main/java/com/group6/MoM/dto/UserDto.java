@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
+	private long id;
     private String username;
     private String email;
     private String role;
@@ -20,11 +21,22 @@ public class UserDto {
     private String accessToken;
 
     public UserDto(User user, String accessToken, Object roleData) {
+    	this.id = user.getUserId();
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.role = user.getRole().getName();
         this.approved = user.isApproved();
         this.accessToken = accessToken;
+
+        this.roleData = roleData;
+    }
+    
+    public UserDto(User user,  Object roleData) {
+    	this.id = user.getUserId();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.role = user.getRole().getName();
+        this.approved = user.isApproved();
 
         this.roleData = roleData;
     }
