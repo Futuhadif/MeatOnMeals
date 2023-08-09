@@ -34,13 +34,17 @@ public class OrderMenu {
 	@ManyToOne
 	@JoinColumn(name = "member_id")
 	private Member member;
-	
+
+
+
+
 	@Column(nullable = false)
 	private String status;
 	
 	@ManyToOne
 	@JoinColumn(name = "driver_id")
 	private Driver driver;
-	
+
 	private String partnerName;
+	private int partnerId;
 }
