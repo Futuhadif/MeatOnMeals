@@ -1,14 +1,9 @@
 package com.group6.MoM.service;
 
 import com.group6.MoM.entity.*;
+import com.group6.MoM.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.group6.MoM.repository.DriverRepository;
-import com.group6.MoM.repository.MemberRepository;
-import com.group6.MoM.repository.MenusRepository;
-import com.group6.MoM.repository.OrderRepository;
-import com.group6.MoM.repository.PartnerRepository;
 
 import java.awt.*;
 import java.util.List;
@@ -35,7 +30,10 @@ public class OrderMenuService{
 	
 	@Autowired
 	private DriverRepository dvr;
-	
+
+	@Autowired
+	private VolunteerRepository vr;
+
 	public void newOrder(int menuId, int memberId) {
 		OrderMenu orderMenu = new OrderMenu();
 
@@ -56,7 +54,13 @@ public class OrderMenuService{
 		orderMenu.setStatus(status);
 		orderRepo.save(orderMenu);
 	}
-	
+	public void changeStatusVolunteer(String status, int orderId, int volunteerId) {
+		OrderMenu orderMenu = orderRepo.getById(orderId);
+		Volunteer volunteer = vr.findById(volunteerId).get();
+		orderMenu.setVolunteer(volunteer);
+		orderMenu.setStatus(status);
+		orderRepo.save(orderMenu);
+	}
 	public void prosesOrder(String status, int orderId) {
 		OrderMenu orderMenu = orderRepo.getById(orderId);
 		orderMenu.setStatus(status);

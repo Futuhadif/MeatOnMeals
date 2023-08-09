@@ -8,5 +8,5 @@ public class DeliveryDto {
 
     Integer orderId;
     Integer driverId;
-
+    Integer volunteerId;
 }

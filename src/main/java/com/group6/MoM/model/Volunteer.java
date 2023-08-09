@@ -21,4 +21,6 @@ public class Volunteer {
 	private String email;
 	
 	private String password;
+
+
 }

@@ -90,7 +90,10 @@ public class OrderController {
 	public void readyOrder(@RequestBody DeliveryDto requestData) {
 		oms.changeStatusOrder("DELIVERING", requestData.getOrderId(), requestData.getDriverId());
 	}
-	
+	@PostMapping("/ready_order_volunteer")
+	public void readyOrderVolunteer(@RequestBody DeliveryDto requestData) {
+		oms.changeStatusVolunteer("DELIVERING", requestData.getOrderId(), requestData.getVolunteerId());
+	}
 	@PostMapping("/delivered_order/{order_id}")
 	public void deliveredOrder(@PathVariable("order_id") int orderId) {
 	    oms.deliveredOrder("DELIVERED", orderId);

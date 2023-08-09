@@ -35,7 +35,10 @@ public class OrderMenu {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
-
+	@ManyToOne
+	@JoinColumn(name = "volunteer_id")
+	private Volunteer volunteer;
+//	private int volunteerId;
 
 
 	@Column(nullable = false)
@@ -47,4 +50,7 @@ public class OrderMenu {
 
 	private String partnerName;
 	private int partnerId;
+
+
+
 }
