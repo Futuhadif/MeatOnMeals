@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -276,6 +277,34 @@ public class UserController {
         }else if(user.getRole().getName().equals("partner")) {
         	com.group6.MoM.entity.Partner roleData = pr.findByUser(user);
             dto = new UserDto(user, token, roleData);
+        }
+		return ResponseEntity.ok(dto);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> userProfile(@PathVariable("id") Integer id){
+    	UserDto dto = null;
+
+		User user = ur.findById(id).get();
+		
+		if(user.getRole().getName().equals("member")) {
+        	com.group6.MoM.entity.Member roleData = mr.findByUser(user);
+            dto = new UserDto(user, roleData);
+        }else if(user.getRole().getName().equals("volunteer")) {
+        	com.group6.MoM.entity.Volunteer roleData = vr.findByUser(user);
+            dto = new UserDto(user, roleData);
+        }else if(user.getRole().getName().equals("admin")) {
+        	com.group6.MoM.entity.Admin roleData = ar.findByUser(user);
+            dto = new UserDto(user, roleData);
+        }else if(user.getRole().getName().equals("driver")) {
+        	com.group6.MoM.entity.Driver roleData = dvr.findByUser(user);
+            dto = new UserDto(user, roleData);
+        }else if(user.getRole().getName().equals("donatur")) {
+        	com.group6.MoM.entity.Donatur roleData = dr.findByUser(user);
+            dto = new UserDto(user, roleData);
+        }else if(user.getRole().getName().equals("partner")) {
+        	com.group6.MoM.entity.Partner roleData = pr.findByUser(user);
+            dto = new UserDto(user, roleData);
         }
 		return ResponseEntity.ok(dto);
 	}
